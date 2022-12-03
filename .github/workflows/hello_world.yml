@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: hello world
-        run: echo hello world
+        run: echo hello worlddd!
         shell: bash
   googbye:
     runs-on: ubuntu-latest
