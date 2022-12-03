@@ -27,15 +27,17 @@ jobs:
       steps:
         - name:  Create comment with API
           run: |
-            gh api -X POST \
-             http://api.github.com/repo/${ORGANIZATION}/${REPOSITORY}/issues/${ISSUE_NUMBER}/comment \
-             -f body='
+            gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            /repos/${OWNER}/{REPO}/issues/${ISSUE_NUMBER}/comments \ 
+            -f body='
              Comment but from the API call not action
              '
           env:
             GITHUB_TOKEN: ${{secrets.MY_TOKEN}}
-            ORGANIZATION: ${{github.event.organization.login}}
-            REPOSITORY: ${{github.event.respository.name}}
+            OWNER: ${{github.event.organization.login}}
+            REPO: ${{github.event.respository.name}}
             ISSUE_NUMBER: ${{github.events.issue.number}}
       
     
