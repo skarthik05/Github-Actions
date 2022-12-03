@@ -27,11 +27,13 @@ jobs:
       steps:
         - name:  Create comment with API
           run: |
-           -X POST \
-            - H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer" ${GITHUB_TOKEN} \
-            https://api.github.com/repos/${OWNER}/${REPO}/issues/${ISSUE_NUMBER}/comments \
-            -d '{"body":"Me too"}'
+            # GitHub CLI api
+            # https://cli.github.com/manual/gh_api
+            gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            /repos/OWNER/REPO/issues/ISSUE_NUMBER/comments \
+            -f body='Me too' 
           env:
             GITHUB_TOKEN: ${{secrets.MY_TOKEN}}
             OWNER: ${{github.event.organization.login}}
